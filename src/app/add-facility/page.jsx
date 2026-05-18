@@ -113,10 +113,10 @@ export default function AddFacilityPage() {
     {/* Image Upload */}
     <div className="md:col-span-2">
       <TextField name="image" >
-        <Label>Facility Image</Label>
+        <Label>Facility Image URL</Label>
         <Input
-          type="file"
-          accept="image/*"
+          type="text"
+         
           className="rounded-2xl"
         />
         <FieldError />
