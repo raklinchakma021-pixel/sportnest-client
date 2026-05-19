@@ -1,3 +1,4 @@
+import BookingCard from "@/components/BookingCard";
 import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModal } from "@/components/EditModal";
 import Image from "next/image";
@@ -60,7 +61,7 @@ const FacilityDetailsPage = async ({params}) => {
       </div>
 
 
-    
+     <BookingCard facility={facility}/>
      </div>
 
 

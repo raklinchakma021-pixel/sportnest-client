@@ -4,11 +4,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 
-// Replace this with your auth state
-const isLoggedIn = true;
+
 
 export default function Navbar() {
+
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+  };
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -59,7 +69,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => {
-              if (link.private && !isLoggedIn) return null;
+              if (link.private) return null;
 
               return (
                 <Link
@@ -75,7 +85,7 @@ export default function Navbar() {
 
           {/* Right Side */}
           <div className="hidden lg:flex items-center gap-4">
-            {isLoggedIn ? (
+           
               <div className="relative">
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
@@ -115,20 +125,40 @@ export default function Navbar() {
                       Manage My Facilities
                     </Link>
 
-                    <button className="w-full text-left px-5 py-3 text-red-500 hover:bg-red-50">
+                    <button onClick={handleSignOut} className="w-full text-left px-5 py-3 text-red-500 hover:bg-red-50">
                       Logout
                     </button>
                   </div>
                 )}
               </div>
-            ) : (
+           
+         { user ? <>
+          <li>
+              <Avatar>
+                <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
+                <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+              </Avatar>
+            </li>
+            <li>
+              <Button size="sm" onClick={handleSignOut} variant="danger" className={"rounded-none"}>
+                Logout
+              </Button>
+            </li>
+          </> :   <>
               <Link
                 href="/login"
                 className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition"
               >
                 Login
               </Link>
-            )}
+              <Link
+                href="/signup"
+                className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition"
+              >
+                Register
+              </Link>
+             </>}
+            
           </div>
 
           {/* Mobile Menu Button */}
@@ -144,7 +174,7 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div className="lg:hidden py-4 space-y-3 border-t">
             {navLinks.map((link) => {
-              if (link.private && !isLoggedIn) return null;
+              if (link.private) return null;
 
               return (
                 <Link
@@ -157,7 +187,7 @@ export default function Navbar() {
               );
             })}
 
-            {isLoggedIn ? (
+             (
               <>
                 <button className="text-red-500 font-medium">
                   Logout
@@ -170,7 +200,7 @@ export default function Navbar() {
               >
                 Login
               </Link>
-            )}
+            )
           </div>
         )}
       </div>

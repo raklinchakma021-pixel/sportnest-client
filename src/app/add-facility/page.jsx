@@ -1,5 +1,6 @@
 "use client"
-
+const dns = require("node:dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import { Button, FieldError, Input, Label, ListBox, TextField , Select, TextArea} from "@heroui/react";
 
 export default function AddFacilityPage() {
