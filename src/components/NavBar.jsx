@@ -41,14 +41,15 @@ export default function Navbar() {
   return (
     <nav className="w-full border-b bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between  h-auto">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/assets/logo.png"
               alt="Logo"
-              width={150}
-              height={150}
+              width={100}
+              height={100}
+              className="py-5"
             />
             <h1 className="text-2xl font-bold text-green-700">
               SportNest
