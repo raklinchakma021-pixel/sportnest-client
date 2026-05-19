@@ -1,3 +1,4 @@
+import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModal } from "@/components/EditModal";
 import Image from "next/image";
 import { BiMoney } from "react-icons/bi";
@@ -22,6 +23,7 @@ const FacilityDetailsPage = async ({params}) => {
       <div className="w-6/12 mx-auto my-8">
         <div className="flex  items-center gap-3 justify-end mt-5 mb-3">
         <EditModal facility={facility} />
+        <DeleteAlert facility={facility}/>
        
       </div>
       <Image
