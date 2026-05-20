@@ -12,7 +12,7 @@ const BookingCard = ({ facility }) => {
 
   console.log(user)
   const [timesSlot, setTimesSlot] = useState(null);
-
+//  console.log(timesSlot)
     const {_id, description, image, ownerEmail, timeSlots, capacity, pricePerHour, location, facilityName } = facility;
 
   const handleBooking = async () => {
@@ -22,7 +22,10 @@ const BookingCard = ({ facility }) => {
         userName: user?.name,
         facilityId: _id,
         facilityName: facilityName,
-        timesSlot: timeSlots
+        timesSlot: new Date(timesSlot),
+        timeSlots,
+        pricePerHour,
+        image
     }
 
 console.log(bookingData)

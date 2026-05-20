@@ -24,12 +24,11 @@ const LoginPage = () => {
     const { data, error } = await authClient.signIn.email({
       email: user.email,
       password: user.password,
+            callbackURL: "/"
     });
 
 
-    if (data) {
-      redirect('/')
-    }
+   
 
     if (error) {
       // toast
