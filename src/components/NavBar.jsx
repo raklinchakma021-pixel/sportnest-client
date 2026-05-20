@@ -87,19 +87,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
            
               <div className="relative">
-                <button
-                  onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-full hover:bg-gray-200 transition"
-                >
-                  <Image
-                    src="https://i.ibb.co/4pDNDk1/avatar.png"
-                    alt="Profile"
-                    width={36}
-                    height={36}
-                    className="rounded-full"
-                  />
-                  <ChevronDown size={18} />
-                </button>
+               
 
                 {/* Dropdown */}
                 {profileOpen && (
@@ -134,7 +122,7 @@ export default function Navbar() {
            
          { user ? <>
           <li>
-              <Avatar>
+              <Avatar       onClick={() => setProfileOpen(!profileOpen)}>
                 <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
                 <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
               </Avatar>
