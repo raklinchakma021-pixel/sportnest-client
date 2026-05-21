@@ -6,20 +6,23 @@ import { FiExternalLink } from "react-icons/fi";
 import { LuMapPin } from "react-icons/lu";
 
 const FacilityCard =({facility})=> {
-console.log(facility)
+console.log(facility.image)
     const {_id, description, image, ownerEmail, timeSlots, capacity, pricePerHour, location, facilityName } = facility;
 
 
    return(
 
        <div className="border p-4">
-      
+{/*       
       <Image
         alt={facilityName}
-      src={image ? image : "/placeholder.jpg"}
+      src={image || null}
         height={400}
         width={400}
-      />
+      /> */}
+
+  {/* <img src={facility.image} alt="sample"  height={500} width={400}/> */}
+
 
       <div className="p-2">
         <div className="flex items-center gap-1">

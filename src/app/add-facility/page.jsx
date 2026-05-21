@@ -1,17 +1,25 @@
 "use client"
+import { authClient } from "@/lib/auth-client";
 // const dns = require("node:dns");
 // dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import { Button, FieldError, Input, Label, ListBox, TextField , Select, TextArea} from "@heroui/react";
-
+// import { useSession } from "@better-auth/react";
 export default function AddFacilityPage() {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+
+  const ownerEmail = session?.user?.email || "";
+
+
       const onSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const facility = Object.fromEntries(formData.entries())
 
         console.log(facility)
-
-           const res = await fetch("http://localhost:5000/facility", {
+  facility.ownerEmail = ownerEmail;
+           const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facility`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -100,7 +108,7 @@ export default function AddFacilityPage() {
     <div className="md:col-span-2">
       <TextField
         name="ownerEmail"
-   
+   value={ownerEmail}
         isReadOnly
       >
         <Label>Owner Email</Label>

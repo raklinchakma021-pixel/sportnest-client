@@ -36,14 +36,16 @@ const FacilityDetailsPage = async ({params}) => {
         <DeleteAlert facility={facility}/>
        
       </div>
-      <Image
+      {/* <Image
         className="w-full h-100 object-cover"
         alt={facilityName}
-        src={image}
+        src={image || null}
         height={500}
         width={800}
-      />
-
+      /> */}
+    {/* <img src={image} alt="sample"  height={500} width={400}/> */}
+  
+       
      <div className="flex justify-between gap-10">
        <div className="p-2">
         <div className="flex items-center gap-1">
