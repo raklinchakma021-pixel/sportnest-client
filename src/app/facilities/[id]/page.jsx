@@ -1,19 +1,28 @@
 import BookingCard from "@/components/BookingCard";
 import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModal } from "@/components/EditModal";
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 import { BiMoney } from "react-icons/bi";
 import { FaRegCalendar } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
-
+import { headers } from "next/headers";
 const FacilityDetailsPage = async ({params}) => {
 
     const {id} = await params
 
-    console.log(id)
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+
+ console.log(token)
 
     
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facility/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facility/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  });
   const facility = await res.json();
   console.log(facility)
 

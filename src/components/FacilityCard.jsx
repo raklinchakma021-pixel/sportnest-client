@@ -6,7 +6,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { LuMapPin } from "react-icons/lu";
 
 const FacilityCard =({facility})=> {
-
+console.log(facility)
     const {_id, description, image, ownerEmail, timeSlots, capacity, pricePerHour, location, facilityName } = facility;
 
 
@@ -16,7 +16,7 @@ const FacilityCard =({facility})=> {
       
       <Image
         alt={facilityName}
-        src={image}
+      src={image ? image : "/placeholder.jpg"}
         height={400}
         width={400}
       />

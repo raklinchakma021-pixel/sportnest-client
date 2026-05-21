@@ -1,36 +1,285 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SportNest 🏟️
 
-## Getting Started
+SportNest is a full-stack sports facility booking management platform where users can explore, book, and manage sports venues like football turfs, badminton courts, basketball arenas, swimming pools, and tennis courts.
 
-First, run the development server:
+The platform is built using the MERN Stack with secure authentication, responsive UI, booking management, and facility CRUD operations.
+
+---
+
+## 🌐 Live Website
+
+🔗 Live Link: https://your-live-site-url.com
+
+---
+
+## 🎯 Project Purpose
+
+The purpose of SportNest is to provide a modern and user-friendly sports facility reservation system where:
+
+- Users can discover available sports facilities
+- Authenticated users can book venues
+- Facility owners can add and manage their facilities
+- Users can track and cancel bookings
+- Booking data is securely stored and managed
+
+---
+
+# ✨ Main Features
+
+## 🔐 Authentication
+
+- Email & Password Authentication
+- Google Login Authentication
+- Protected Private Routes
+- JWT Authentication with HTTPOnly Cookies
+- Persistent Login on Reload
+
+---
+
+## 🏟️ Facility Management
+
+- Add New Sports Facility
+- Update Facility Information
+- Delete Facility
+- Manage Personal Facilities
+- Upload Facility Images
+
+---
+
+## 📅 Booking System
+
+- Book Available Facilities
+- Select Booking Date & Time Slot
+- Automatic Total Price Calculation
+- View My Bookings
+- Cancel Booking
+
+---
+
+## 🔎 Search & Filter
+
+- Search facilities by name
+- Filter facilities by sport type
+- MongoDB `$regex` and `$in` operators used
+
+---
+
+## 🎨 UI/UX Features
+
+- Fully Responsive Design
+- Modern Sports-Themed Interface
+- Loading Spinner
+- Custom 404 Page
+- Toast Notifications
+- Equal Height Responsive Cards
+- Clean and Recruiter-Friendly Design
+
+---
+
+## 🧩 Extra Features
+
+- Theme Toggle
+- Framer Motion Animations
+- Dynamic Featured Facilities Section
+- Responsive Mobile Navigation
+
+---
+
+# 🛠️ Technologies Used
+
+## Frontend
+
+- Next.js
+- React.js
+- Tailwind CSS
+- Axios
+- React Hook Form
+- React Hot Toast
+- Framer Motion
+- Swiper.js
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- JWT
+- Cookie Parser
+- CORS
+- Dotenv
+
+---
+
+## Authentication
+
+- Firebase Authentication
+- Google Authentication
+- JWT Token Authentication
+
+---
+
+# 📦 NPM Packages Used
+
+## Client Side
+
+```bash
+next
+react
+react-dom
+tailwindcss
+axios
+react-hot-toast
+react-hook-form
+framer-motion
+swiper
+lucide-react
+```
+
+## Server Side
+
+```bash
+express
+mongodb
+jsonwebtoken
+cookie-parser
+cors
+dotenv
+```
+
+---
+
+# 📂 Database Collections
+
+## Facilities Collection
+
+```js
+{
+  name,
+  facility_type,
+  image,
+  location,
+  price_per_hour,
+  capacity,
+  available_slots,
+  description,
+  owner_email,
+  booking_count
+}
+```
+
+## Bookings Collection
+
+```js
+{
+  facility_id,
+  user_email,
+  booking_date,
+  time_slot,
+  hours,
+  total_price,
+  status
+}
+```
+
+---
+
+# 🔑 Environment Variables
+
+## Client
+
+```env
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+```
+
+## Server
+
+```env
+PORT=
+MONGODB_URI=
+JWT_SECRET=
+CLIENT_URL=
+```
+
+---
+
+# 🚀 Installation & Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/your-username/sportnest-client.git
+git clone https://github.com/your-username/sportnest-server.git
+```
+
+---
+
+## Install Dependencies
+
+### Client
+
+```bash
+npm install
+```
+
+### Server
+
+```bash
+npm install
+```
+
+---
+
+## Run Development Server
+
+### Client
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Server
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 📱 Responsive Design
 
-To learn more about Next.js, take a look at the following resources:
+SportNest is fully optimized for:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Mobile Devices
+- Tablets
+- Laptops
+- Desktop Screens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# 🔒 Security Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- JWT Authentication
+- HTTPOnly Cookies
+- Protected API Routes
+- Environment Variable Protection
+- Secure MongoDB Credentials
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+# 👨‍💻 Developer
+
+Developed by [Raklin Chakma]
+
+---
+
+# 📄 License
+
+This project is created for educational purposes.

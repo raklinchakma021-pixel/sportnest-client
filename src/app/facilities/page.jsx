@@ -16,7 +16,7 @@ const FacilitiesPage = async () => {
 
     return (
       <div className="w-10/12 mx-auto">
-          <h1 className="font-bold text-3xl py-6">All Facilities</h1>
+          <h1 className="font-bold text-3xl py-6">All Featured Facilities</h1>
 
           <div className="grid grid-cols-3 gap-6 mb-6">
             {
