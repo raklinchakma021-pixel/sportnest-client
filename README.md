@@ -8,7 +8,7 @@ The platform is built using the MERN Stack with secure authentication, responsiv
 
 ## 🌐 Live Website
 
-🔗 Live Link: https://your-live-site-url.com
+🔗 Live Link: https://sportnest-client-phi.vercel.app/
 
 ---
 
