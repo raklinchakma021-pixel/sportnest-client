@@ -13,6 +13,7 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const onSubmit = async (e) => {
@@ -29,6 +30,7 @@ const SignUpPage = () => {
     });
 
     if (data) {
+      toast.success("Register Successful");
       redirect("/");
     }
 
@@ -49,7 +51,7 @@ const SignUpPage = () => {
     <div className="max-w-7xl mx-auto">
       <div className="text-center my-3">
         <h1 className="text-2xl font-bold">Create Account</h1>
-        <p>Start your adventure with Wanderlust</p>
+        <p>Start your journey with SportNest</p>
       </div>
       <Card className="border rounded-none">
         <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
@@ -86,8 +88,8 @@ const SignUpPage = () => {
             name="password"
             type="password"
             validate={(value) => {
-              if (value.length < 8) {
-                return "Password must be at least 8 characters";
+              if (value.length < 6) {
+                return "Password must be at least 6 characters";
               }
               if (!/[A-Z]/.test(value)) {
                 return "Password must contain at least one uppercase letter";
@@ -101,12 +103,12 @@ const SignUpPage = () => {
             <Label>Password</Label>
             <Input placeholder="Enter your password" />
             <Description>
-              Must be at least 8 characters with 1 uppercase and 1 number
+              Must be at least 6 characters with 1 uppercase and 1 number
             </Description>
             <FieldError />
           </TextField>
           <div className="flex justify-center gap-2">
-            <Button className={"rounded-none w-full bg-cyan-500"} type="submit">
+            <Button className={"rounded-none w-full bg-green-500"} type="submit">
               Create Account
             </Button>
           </div>
