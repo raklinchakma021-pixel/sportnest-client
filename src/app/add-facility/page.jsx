@@ -4,34 +4,61 @@ import { authClient } from "@/lib/auth-client";
 // dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import { Button, FieldError, Input, Label, ListBox, TextField , Select, TextArea} from "@heroui/react";
 // import { useSession } from "@better-auth/react";
+import { useRouter } from "next/navigation";
 export default function AddFacilityPage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
 
   const ownerEmail = session?.user?.email || "";
+const router = useRouter();
 
+  //     const onSubmit = async (e) => {
+  //       e.preventDefault()
+  //       const formData = new FormData(e.currentTarget)
+  //       const facility = Object.fromEntries(formData.entries())
 
-      const onSubmit = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        const facility = Object.fromEntries(formData.entries())
+  //       console.log(facility)
+  // facility.ownerEmail = ownerEmail;
+  //          const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facility`, {
+  //           method: 'POST',
+  //           headers: {
+  //               'content-type': 'application/json'
+  //           },
+  //           body: JSON.stringify(facility)
+  //       })
 
-        console.log(facility)
-  facility.ownerEmail = ownerEmail;
-           const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facility`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(facility)
-        })
-
-        const data = await res.json()
-  console.log(data)
+  //       const data = await res.json()
+  // console.log(data)
 
     
-      }
+  //     }
+
+  const onSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+  const facility = Object.fromEntries(formData.entries());
+
+  facility.ownerEmail = ownerEmail;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/facility`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(facility),
+    }
+  );
+
+  const data = await res.json();
+
+  if (data.insertedId) {
+    router.push("/manage-my-facilities");
+  }
+};
   return (
     <div className="w-10/12 mx-auto">
 

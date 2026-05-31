@@ -32,10 +32,7 @@ const MyBookingPage = async () => {
 
       <div className="space-y-5">
         {bookings.map((booking) => {
-          // calculate total price
-          const totalPrice =
-            Number(booking.pricePerHour) *
-            Number(booking.totalHours || 1);
+          
 
           return (
             <div
@@ -85,10 +82,7 @@ const MyBookingPage = async () => {
                   {booking.pricePerHour}
                 </p>
 
-                {/* Total Price */}
-                <p className="text-3xl font-bold text-cyan-500">
-                  Total Price: ${totalPrice}
-                </p>
+             
 
                 <div className="pt-3">
                   <BookingCancelAlert bookingId={booking._id} />

@@ -2,241 +2,185 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { Avatar } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { Avatar, Button } from "@heroui/react";
 
 export default function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  const handleSignOut = async () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleLogout = async () => {
     await authClient.signOut();
+    setProfileOpen(false);
   };
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
-
-  const navLinks = [
-    {
-      name: "Home",
-      href: "/",
-    },
-    {
-      name: "All Facilities",
-      href: "/facilities",
-    },
-    {
-      name: "My Bookings",
-      href: "/my-bookings",
-      private: true,
-    },
-    {
-      name: "Add Facility",
-      href: "/add-facility",
-      private: true,
-    },
-    {
-      name: "Manage My Facilities",
-      href: "/manage-facilities",
-      private: true,
-    },
-  ];
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
-    <nav className="w-full border-b bg-white shadow-sm sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-auto">
+        <div className="flex items-center justify-between h-16">
+
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/assets/logo.png"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="py-5"
-            />
-            <h1 className="text-2xl font-bold text-green-700">
-              SportNest
-            </h1>
+            <Image src="/assets/logo.png" alt="Logo" width={100} height={100} />
+            <span className="text-xl font-bold text-green-700">SportNest</span>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => {
-              if (link.private && !user) return null;
+            <Link href="/" className="nav-link">Home</Link>
+            <Link href="/facilities" className="nav-link">All Facilities</Link>
 
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-700 hover:text-green-700 font-medium transition"
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Right Side Desktop */}
-          <div className="hidden lg:flex items-center gap-4">
-            {user ? (
+            {user && (
               <>
-                {/* Avatar + Dropdown */}
-                <div className="relative">
-                  <button
-                    onClick={() => setProfileOpen(!profileOpen)}
-                    className="flex items-center gap-2"
-                  >
-                    <Avatar
-                      src={user?.image || ""}
-                      name={user?.name}
-                    />
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform ${
-                        profileOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-
-                  {/* Dropdown */}
-                  {profileOpen && (
-                    <div className="absolute right-0 mt-3 w-60 bg-white border rounded-xl shadow-lg overflow-hidden z-50">
-                      <Link
-                        href="/my-bookings"
-                        className="block px-5 py-3 hover:bg-gray-100"
-                      >
-                        My Bookings
-                      </Link>
-
-                      <Link
-                        href="/add-facility"
-                        className="block px-5 py-3 hover:bg-gray-100"
-                      >
-                        Add Facility
-                      </Link>
-
-                      <Link
-                        href="/manage-facilities"
-                        className="block px-5 py-3 hover:bg-gray-100"
-                      >
-                        Manage My Facilities
-                      </Link>
-
-                      <button
-                        onClick={handleSignOut}
-                        className="w-full text-left px-5 py-3 text-red-500 hover:bg-red-50"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                <Button
-                  size="sm"
-                  onClick={handleSignOut}
-                  color="danger"
-                  className="rounded-none"
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition"
-                >
-                  Login
-                </Link>
-
-                <Link
-                  href="/signup"
-                  className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition"
-                >
-                  Register
+                <Link href="/my-bookings" className="nav-link">My Bookings</Link>
+                <Link href="/add-facility" className="nav-link">Add Facility</Link>
+                <Link href="/manage-my-facilities" className="nav-link">
+                  Manage My Facilities
                 </Link>
               </>
             )}
           </div>
 
+          {/* Right Side */}
+          <div className="hidden lg:block">
+            {user ? (
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex items-center gap-2"
+                >
+                 
+                  <Avatar src={user.image || ""} name={user.name} />
+                  <ChevronDown
+                    size={18}
+                    className={`transition ${profileOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {profileOpen && (
+                  <div className="absolute right-0 mt-3 w-56 bg-white border rounded-lg shadow-lg overflow-hidden">
+                    <DropdownLink href="/my-bookings">My Bookings</DropdownLink>
+                    <DropdownLink href="/add-facility">Add Facility</DropdownLink>
+                    <DropdownLink href="/manage-my-facilities">
+                      Manage My Facilities
+                    </DropdownLink>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex gap-2">
+              <Link
+                href="/login"
+                className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium"
+              >
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium"
+              >
+                Signup
+              </Link>
+              </div>
+            )}
+          </div>
+
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileOpen(!mobileOpen)}
             className="lg:hidden"
           >
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 space-y-4 border-t">
-            {/* Mobile User Section */}
+        {mobileOpen && (
+          <div className="lg:hidden border-t py-4 space-y-3">
+            <MobileLink href="/" onClick={setMobileOpen}>Home</MobileLink>
+            <MobileLink href="/facilities" onClick={setMobileOpen}>
+              All Facilities
+            </MobileLink>
+
             {user ? (
-              <div className="flex items-center gap-3 border-b pb-4">
-                <Avatar
-                  src={user?.image || ""}
-                  name={user?.name}
-                />
-
-                <div>
-                  <h3 className="font-semibold">{user?.name}</h3>
-                  <p className="text-sm text-gray-500">
-                    {user?.email}
-                  </p>
-                </div>
-              </div>
-            ) : null}
-
-            {/* Mobile Links */}
-            {navLinks.map((link) => {
-              if (link.private && !user) return null;
-
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="block text-gray-700 hover:text-green-700 font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
+              <>
+                <MobileLink href="/my-bookings" onClick={setMobileOpen}>
+                  My Bookings
+                </MobileLink>
+                <MobileLink href="/add-facility" onClick={setMobileOpen}>
+                  Add Facility
+                </MobileLink>
+                <MobileLink href="/manage-facilities" onClick={setMobileOpen}>
+                  Manage My Facilities
+                </MobileLink>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left text-red-600 font-medium"
                 >
-                  {link.name}
-                </Link>
-              );
-            })}
-
-            {/* Mobile Auth Buttons */}
-            {user ? (
-              <Button
-                onClick={handleSignOut}
-                color="danger"
-                className="w-full"
-              >
-                Logout
-              </Button>
+                  Logout
+                </button>
+              </>
             ) : (
-              <div className="flex flex-col gap-3 pt-2">
-                <Link
-                  href="/login"
-                  className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition text-center"
-                >
-                  Login
-                </Link>
-
-                <Link
-                  href="/signup"
-                  className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition text-center"
-                >
-                  Register
-                </Link>
+              <div className="flex gap-2">
+              <MobileLink href="/login" onClick={setMobileOpen}>
+                Login
+              </MobileLink>
+              <MobileLink href="/signup" onClick={setMobileOpen}>
+                Signup
+              </MobileLink>
               </div>
             )}
           </div>
         )}
       </div>
     </nav>
+  );
+}
+
+/* ---------- Reusable Components ---------- */
+
+function DropdownLink({ href, children }) {
+  return (
+    <Link
+      href={href}
+      className="block px-4 py-3 hover:bg-gray-100"
+    >
+      {children}
+    </Link>
+  );
+}
+
+function MobileLink({ href, children, onClick }) {
+  return (
+    <Link
+      href={href}
+      onClick={() => onClick(false)}
+      className="block font-medium text-gray-700"
+    >
+      {children}
+    </Link>
   );
 }

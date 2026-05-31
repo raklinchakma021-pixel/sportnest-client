@@ -43,10 +43,7 @@ const BookingCard = ({ facility }) => {
 
       pricePerHour,
 
-      // NEW
-      totalHours,
-      totalPrice,
-      status: "pending",
+  
     };
 
     console.log(bookingData);
@@ -88,14 +85,7 @@ const BookingCard = ({ facility }) => {
         <p className="text-sm text-muted">per person</p>
       </div>
 
-      {/* Total Price */}
-      <div className="border-y py-3">
-        <p className="text-sm text-gray-500">Total Price</p>
-
-        <h3 className="text-2xl font-bold text-cyan-500">
-          ${pricePerHour}
-        </h3>
-      </div>
+     
 
       <DateField
         onChange={setTimesSlot}
@@ -113,14 +103,7 @@ const BookingCard = ({ facility }) => {
         </DateField.Group>
       </DateField>
 
-      {/* Default Status */}
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">Status</span>
-
-        <span className="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm font-semibold capitalize">
-          pending
-        </span>
-      </div>
+    
 
       <Button
         onClick={handleBooking}

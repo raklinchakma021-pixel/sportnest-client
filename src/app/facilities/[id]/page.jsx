@@ -3,7 +3,6 @@ import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModal } from "@/components/EditModal";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
-import { BiMoney } from "react-icons/bi";
 import { FaRegCalendar } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
 import { headers } from "next/headers";
@@ -36,13 +35,13 @@ const FacilityDetailsPage = async ({params}) => {
         <DeleteAlert facility={facility}/>
        
       </div>
-      {/* <Image
+      <Image
         className="w-full h-100 object-cover"
         alt={facilityName}
         src={image || null}
         height={500}
         width={800}
-      /> */}
+      />
     {/* <img src={image} alt="sample"  height={500} width={400}/> */}
   
        
