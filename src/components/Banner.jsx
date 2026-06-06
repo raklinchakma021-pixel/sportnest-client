@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Banner() {
   return (
-<section className="relative overflow-hidden min-h-screen flex items-center justify-center w-full">
+<section className="relative overflow-hidden min-h-screen flex items-center justify-center w-full py-8 md:py-0">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image

@@ -74,7 +74,7 @@ const BookingCard = ({ facility }) => {
   };
 
   return (
-    <Card className="rounded-none border mt-5 p-5 space-y-4">
+    <Card className="rounded-none border mt-5 p-5 space-y-4 w-auto">
       <div>
         <p className="text-sm text-muted">Starting from</p>
 
@@ -89,7 +89,7 @@ const BookingCard = ({ facility }) => {
 
       <DateField
         onChange={setTimesSlot}
-        className="w-full"
+        className="flex flex-wrap w-full pr-10"
         name="date"
       >
         <Label>TimeSlot</Label>

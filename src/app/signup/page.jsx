@@ -5,9 +5,10 @@ import Link from "next/link";
 
 import { Eye, EyeSlash, ArrowLeft } from "@gravity-ui/icons";
 
-import { Button, Card } from "@heroui/react";
+import { Button, Card, Separator } from "@heroui/react";
 
 import { authClient } from "@/lib/auth-client";
+import { FcGoogle } from "react-icons/fc";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +71,12 @@ export default function SignUpPage() {
       setLoading(false);
     }
   };
+ const handleGoogleSignin = async() => {
+    await authClient.signIn.social({
+        provider: "google"
+    })
 
+  }
   return (
     <section className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 dark:bg-black">
       <Card className="w-full max-w-md rounded-3xl border border-zinc-200 bg-white p-8 shadow-xl dark:border-zinc-800 dark:bg-zinc-950">
@@ -204,7 +210,7 @@ export default function SignUpPage() {
             type="submit"
             color="primary"
             radius="lg"
-            className="w-full font-semibold"
+            className="w-full font-semibold bg-green-600"
             loading={loading}
           >
             {loading ? "Creating Account..." : "Sign Up"}
@@ -221,6 +227,15 @@ export default function SignUpPage() {
             Sign In
           </Link>
         </p>
+
+           <div className="flex justify-center items-center gap-3">
+            <Separator/>
+           <div className="whitespace-nowrap"> Or sign up with </div>
+              <Separator/>
+            </div>
+        <div>
+            <Button onClick={handleGoogleSignin} variant="outline" className={'w-full rounded-none'}><FcGoogle /> Sign up with Google</Button>
+        </div>
       </Card>
     </section>
   );

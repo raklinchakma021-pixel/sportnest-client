@@ -133,7 +133,7 @@ export default function Navbar() {
                 <MobileLink href="/add-facility" onClick={setMobileOpen}>
                   Add Facility
                 </MobileLink>
-                <MobileLink href="/manage-facilities" onClick={setMobileOpen}>
+                <MobileLink href="/manage-my-facilities" onClick={setMobileOpen}>
                   Manage My Facilities
                 </MobileLink>
                 <button
@@ -145,10 +145,10 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex gap-2">
-              <MobileLink href="/login" onClick={setMobileOpen}>
+              <MobileLink href="/login" onClick={setMobileOpen} className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium">
                 Login
               </MobileLink>
-              <MobileLink href="/signup" onClick={setMobileOpen}>
+              <MobileLink href="/signup" onClick={setMobileOpen} className="bg-green-700 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium">
                 Signup
               </MobileLink>
               </div>

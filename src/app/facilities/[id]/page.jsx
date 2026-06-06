@@ -29,7 +29,7 @@ const FacilityDetailsPage = async ({params}) => {
     const {_id, description, image, ownerEmail, timeSlots, capacity, pricePerHour, location, facilityName } = facility;
     return (
 
-      <div className="w-6/12 mx-auto my-8">
+      <div className=" w-11/12 md:w-6/12 mx-auto my-8">
         <div className="flex  items-center gap-3 justify-end mt-5 mb-3">
         <EditModal facility={facility} />
         <DeleteAlert facility={facility}/>

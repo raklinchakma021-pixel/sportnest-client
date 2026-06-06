@@ -1,5 +1,6 @@
 
 import Banner from "@/components/Banner";
+import Featured from "@/components/Featured";
 
 import SportsCategories from "@/components/SportsCategory";
 import Testimonials from "@/components/Testimonials";
@@ -18,7 +19,7 @@ export default function Home() {
       
 
      
-     
+      <Featured/>
      
 
      

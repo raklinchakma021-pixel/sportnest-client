@@ -1,5 +1,5 @@
 import FacilityCard from "@/components/FacilityCard";
-
+export const dynamic = "force-dynamic";
 const FacilitiesPage = async ({ searchParams }) => {
   try {
     // Get query params
@@ -7,6 +7,7 @@ const FacilitiesPage = async ({ searchParams }) => {
 
 const search = params?.search || "";
 const sportType = params?.sportType || "";
+
 
     // Build query string
     const query = new URLSearchParams();
@@ -23,6 +24,7 @@ const sportType = params?.sportType || "";
       `${process.env.NEXT_PUBLIC_SERVER_URL}/facility?${query.toString()}`,
       {
         cache: "no-store",
+        
       }
     );
 
@@ -56,10 +58,9 @@ const sportType = params?.sportType || "";
             className="border px-4 py-2 rounded-md"
           >
             <option value="">All Sports</option>
-            <option value="Football">Football</option>
-            <option value="Cricket">Cricket</option>
-            <option value="Badminton">Badminton</option>
-            <option value="Basketball">Basketball</option>
+            <option value="Football">Indoor</option>
+            <option value="Cricket">Outdoor</option>
+           
           </select>
 
           <button
